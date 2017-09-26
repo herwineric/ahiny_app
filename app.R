@@ -1,15 +1,13 @@
 
 
 library(shiny)
-library(httr)
-library(png)
-library(jsonlite)
+library(Lab5InYourFace)
 
 # UI
 ui <- fluidPage(
    
    # Application title
-   titlePanel("Old Faithful Geyser Data"),
+   titlePanel("Search with google"),
    
    # Sidebar with a slider input for number of bins 
    sidebarLayout(
@@ -24,7 +22,8 @@ ui <- fluidPage(
       
       # Show a plot of the generated distribution
       mainPanel(
-         plotOutput("distPlot", height = "640px")
+         plotOutput("distPlot", height = "640px"),
+         tableOutput('table')
       )
    
 )
@@ -40,10 +39,12 @@ server <- function(input, output) {
        plot(0:1,0:1,type="n",ann=FALSE,axes=FALSE)
        
      } else {
-       plota_karta(input$search, zoom = input$zoom)
+       plot_address(input$search, zoom = input$zoom)
        Sys.sleep(0.3)
      }
-      
+    
+     
+     output$table <- renderTable(data_address(input$search))
      
    })
 }
