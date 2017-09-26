@@ -17,7 +17,7 @@ ui <- fluidPage(
                      "Zoom lv:",
                      min = 3,
                      max = 21,
-                     value = 1)
+                     value = 10)
       ),
       
       # Show a plot of the generated distribution
@@ -43,8 +43,14 @@ server <- function(input, output) {
        Sys.sleep(0.3)
      }
     
+     if(input$search == ""){
+       
+     } else {
+       output$table <- renderTable(data_address(input$search))
+       
+     }
      
-     output$table <- renderTable(data_address(input$search))
+     
      
    })
 }
