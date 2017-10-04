@@ -1,7 +1,7 @@
 
 
 library(shiny)
-library(Lab5InYourFace)
+require(Lab5InYourFace)
 
 # UI
 ui <- fluidPage(
